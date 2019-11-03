@@ -1,4 +1,8 @@
-#include "common.h"
+/**
+ * Name: Michael Dombrovsky
+ * Student Number: 1040277
+ * Email: mdombrov@uoguelph.ca
+ **/ 
 
 struct title_principals {
     char *nconst;

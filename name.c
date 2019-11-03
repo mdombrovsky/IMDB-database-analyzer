@@ -1,10 +1,18 @@
+/**
+ * Name: Michael Dombrovsky
+ * Student Number: 1040277
+ * Email: mdombrov@uoguelph.ca
+ **/ 
 #include "name.h"
+#include "binary.h"
+#include "common.h"
 
-struct name_basics *get_name(char* string){
+struct name_basics_meta *get_name(char* string){
 
     FILE *fptr;
 
     struct name_basics *name_basics_array=NULL;
+    struct name_basics_meta *name_basics_meta;
 
     char *buffer;
     char *file_name;
@@ -77,6 +85,26 @@ struct name_basics *get_name(char* string){
     fptr=NULL;
 
 
-    return name_basics_array;
+    name_basics_meta=malloc(sizeof(name_basics_meta));
+    name_basics_meta->array=name_basics_array;
+    name_basics_meta->count=preformer_count;
+    name_basics_meta->nconst_index=0;
+    name_basics_meta->name_index=0;
+
+    return name_basics_meta;
+}
+
+void build_bn_name_index(struct name_basics_meta *name_basics_meta){
+
+    int i;
+
+    /*Loop over all elements in array*/
+    for(i=0;i<(name_basics_meta->count);i++){
+        add_node(&(name_basics_meta->name_index),((name_basics_meta->array)+i)->primaryName,((name_basics_meta->array)+i));
+    }
+}
+
+struct name_basics *find_primary_name(struct name_basics_meta *name_basics_meta,char* search_term){
+    return find_node((name_basics_meta->name_index),search_term);
 }
 

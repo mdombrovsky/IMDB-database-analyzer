@@ -1,10 +1,18 @@
+/**
+ * Name: Michael Dombrovsky
+ * Student Number: 1040277
+ * Email: mdombrov@uoguelph.ca
+ **/ 
 #include "title.h"
+#include "binary.h"
+#include "common.h"
 
-struct title_basics *get_title(char* string){
+struct title_basics_meta *get_title(char* string){
 
     FILE *fptr;
 
     struct title_basics *title_basics_array=NULL;
+    struct title_basics_meta *title_basics_meta=NULL;
 
     char *buffer;
     char *file_name;
@@ -55,6 +63,8 @@ struct title_basics *get_title(char* string){
         free(column);
     }
 
+    printf("Lines: %d\n",movie_count);
+
     /*Allocates array*/
     title_basics_array=malloc(sizeof(struct title_basics)*movie_count);
 
@@ -86,7 +96,26 @@ struct title_basics *get_title(char* string){
     fclose(fptr);
     fptr=NULL;
 
+    title_basics_meta=malloc(sizeof(title_basics_meta));
+    title_basics_meta->array=title_basics_array;
+    title_basics_meta->count=movie_count;
+    title_basics_meta->tconst_index=0;
+    title_basics_meta->title_index=0;
 
-    return title_basics_array;
+    return title_basics_meta;
+}
+
+void build_bt_title_index(struct title_basics_meta *title_basics_meta){
+
+    int i;
+
+    /*Loop over all elements in array*/
+    for(i=0;i<(title_basics_meta->count);i++){
+        add_node(&(title_basics_meta->title_index),((title_basics_meta->array)+i)->primaryTitle,((title_basics_meta->array)+i));
+    }
+}
+
+struct title_basics *find_primary_title(struct title_basics_meta *title_basics_meta,char* search_term){
+    return find_node((title_basics_meta->title_index),search_term);
 }
 

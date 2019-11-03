@@ -1,5 +1,9 @@
 #include "common.h"
-
+/**
+ * Name: Michael Dombrovsky
+ * Student Number: 1040277
+ * Email: mdombrov@uoguelph.ca
+ **/ 
 void get_column(char *line, char **toReturn, int columnNumber){
     char *start;
     int i;

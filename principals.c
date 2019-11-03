@@ -1,4 +1,11 @@
+/**
+ * Name: Michael Dombrovsky
+ * Student Number: 1040277
+ * Email: mdombrov@uoguelph.ca
+ **/ 
 #include "principals.h"
+#include "common.h"
+
 
 struct title_principals *get_principals(char* string){
 
