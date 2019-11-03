@@ -1,5 +1,4 @@
 #include "name.h"
-#include "common.h"
 
 struct name_basics *get_name(char* string){
 
@@ -16,6 +15,8 @@ struct name_basics *get_name(char* string){
     char *column=NULL;
     
     int preformer_count=0;
+
+    int buffer_size=1000;
 
     file_name=malloc(strlen(string)+strlen(suffix)+1);
 
@@ -34,14 +35,14 @@ struct name_basics *get_name(char* string){
 
     /*If unable to open*/
     if(fptr==NULL){
-        fprintf( stderr, "Error opening file %s%s\n", string,"/name.basics.tsv");
+        fprintf( stderr, "Error opening file %s%s\n", string,suffix);
         return NULL;
     }
 
-    buffer=malloc(257);
+    buffer=malloc(buffer_size+1);
 
     /*Get amount of preformers*/
-    while(fgets(buffer ,256 ,fptr)!=NULL){
+    while(fgets(buffer, buffer_size ,fptr)!=NULL){
         get_column(buffer,&column,4);
         if((strstr(column,"actor")!=NULL)||(strstr(column,"actress")!=NULL)){
             preformer_count++;
@@ -56,7 +57,7 @@ struct name_basics *get_name(char* string){
     preformer_count=0;
 
     /*Populates array*/
-    while(fgets(buffer ,256 ,fptr)!=NULL){
+    while(fgets(buffer ,buffer_size ,fptr)!=NULL){
         get_column(buffer,&column,4);
         if((strstr(column,"actor")!=NULL)||(strstr(column,"actress")!=NULL)){
            
@@ -67,7 +68,6 @@ struct name_basics *get_name(char* string){
             (name_basics_array+preformer_count)->primaryName=data;
 
             preformer_count++;
-
         }
         free(column);
     }
@@ -78,6 +78,5 @@ struct name_basics *get_name(char* string){
 
 
     return name_basics_array;
-
 }
 

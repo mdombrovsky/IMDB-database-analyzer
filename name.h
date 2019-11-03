@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "common.h"
 
 struct name_basics {
     char *nconst;
