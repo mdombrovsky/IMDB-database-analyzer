@@ -37,6 +37,15 @@ void get_column(char *line, char **toReturn, int columnNumber){
     strncpy((*toReturn),start,len);
 
     (*toReturn)[len]='\0';
-  
+}
 
+void reverse(char*string){
+    int i;
+    char temp;
+    int len=strlen(string)-1;
+    for(i=0;i<len/2;i++){
+        temp=string[i];
+        string[i]=string[len-i];
+        string[len-i]=temp;
+    }
 }

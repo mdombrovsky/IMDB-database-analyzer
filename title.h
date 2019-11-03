@@ -20,4 +20,8 @@ struct title_basics{
 struct title_basics_meta *get_title(char* string);
 
 void build_bt_title_index(struct title_basics_meta *title_basics_meta);
-struct title_basics *find_primary_title(struct title_basics_meta *title_basics_meta,char* search_term);
+void build_bt_tconst_index(struct title_basics_meta *title_basics_meta);
+
+struct title_basics *find_bt_title(struct title_basics_meta *title_basics_meta,char* search_term);
+struct title_basics *find_bt_tconst(struct title_basics_meta *title_basics_meta,char* search_term);
+

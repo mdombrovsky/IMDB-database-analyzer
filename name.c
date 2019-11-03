@@ -70,6 +70,7 @@ struct name_basics_meta *get_name(char* string){
         if((strstr(column,"actor")!=NULL)||(strstr(column,"actress")!=NULL)){
            
             get_column(buffer,&data,0);
+            reverse(data);
             (name_basics_array+preformer_count)->nconst=data;
 
             get_column(buffer,&data,1);
@@ -94,17 +95,29 @@ struct name_basics_meta *get_name(char* string){
     return name_basics_meta;
 }
 
+void build_bn_nconst_index(struct name_basics_meta *name_basics_meta){
+   int i;
+    /*Loop over all elements in array*/
+    for(i=0;i<(name_basics_meta->count);i++){
+        add_node(&(name_basics_meta->nconst_index),((name_basics_meta->array)+i)->nconst,((name_basics_meta->array)+i));
+    }
+}
+
 void build_bn_name_index(struct name_basics_meta *name_basics_meta){
-
     int i;
-
     /*Loop over all elements in array*/
     for(i=0;i<(name_basics_meta->count);i++){
         add_node(&(name_basics_meta->name_index),((name_basics_meta->array)+i)->primaryName,((name_basics_meta->array)+i));
     }
 }
 
-struct name_basics *find_primary_name(struct name_basics_meta *name_basics_meta,char* search_term){
-    return find_node((name_basics_meta->name_index),search_term);
+struct name_basics *find_bn_name(struct name_basics_meta *name_basics_meta,char* search_term){
+    return (find_node((name_basics_meta->name_index),search_term)->data);
 }
+
+struct name_basics *find_bn_nconst(struct name_basics_meta *name_basics_meta,char* search_term){
+    return (find_node((name_basics_meta->nconst_index),search_term)->data);
+}
+
+
 

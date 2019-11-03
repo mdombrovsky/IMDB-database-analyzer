@@ -24,10 +24,10 @@ void add_node(struct node **node,char*key,void*data){
     }
 }
 
-void* find_node(struct node *node,char *key){
+struct node* find_node(struct node *node,char *key){
     if(node){
         if(strcmp(node->key,key)==0){
-            return node->data;
+            return node;
         } else if(strcmp(node->key,key)<0){
             return find_node(node->right_child,key);
         } else{

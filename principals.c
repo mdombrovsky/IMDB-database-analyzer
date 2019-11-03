@@ -5,13 +5,15 @@
  **/ 
 #include "principals.h"
 #include "common.h"
+#include "binary.h"
 
 
-struct title_principals *get_principals(char* string){
+struct title_principals_meta *get_principals(char* string){
 
     FILE *fptr;
 
     struct title_principals *title_principals_array=NULL;
+    struct title_principals_meta *title_principals_meta=NULL;
 
     char *buffer;
     char *file_name;
@@ -70,9 +72,11 @@ struct title_principals *get_principals(char* string){
         if((strstr(column,"actor")!=NULL)||(strstr(column,"actress")!=NULL)){
            
             get_column(buffer,&data,0);
+            reverse(data);
             (title_principals_array+preformer_count)->tconst=data;
 
             get_column(buffer,&data,2);
+            reverse(data);
             (title_principals_array+preformer_count)->nconst=data;
 
             get_column(buffer,&data,5);
@@ -88,6 +92,41 @@ struct title_principals *get_principals(char* string){
     fptr=NULL;
 
 
-    return title_principals_array;
+    title_principals_meta=malloc(sizeof(title_principals_meta));
+    title_principals_meta->array=title_principals_array;
+    title_principals_meta->count=preformer_count;
+    title_principals_meta->tconst_index=0;
+    title_principals_meta->nconst_index=0;
+
+    return title_principals_meta;
 }
+
+
+void build_tp_tconst_index(struct title_principals_meta *title_principals_meta){
+    int i;
+    /*Loop over all elements in array*/
+    for(i=0;i<(title_principals_meta->count);i++){
+        add_node(&(title_principals_meta->tconst_index),((title_principals_meta->array)+i)->tconst,((title_principals_meta->array)+i));
+    }
+}
+
+
+struct title_principals *find_tp_tconst(struct title_principals_meta *title_principals_meta,char* search_term){
+    return (find_node((title_principals_meta->tconst_index),search_term)->data);
+}
+
+void build_tp_nconst_index(struct title_principals_meta *title_principals_meta){
+    int i;
+    /*Loop over all elements in array*/
+    for(i=0;i<(title_principals_meta->count);i++){
+        add_node(&(title_principals_meta->nconst_index),((title_principals_meta->array)+i)->nconst,((title_principals_meta->array)+i));
+    }
+}
+
+
+struct title_principals *find_tp_nconst(struct title_principals_meta *title_principals_meta,char* search_term){
+    return (find_node((title_principals_meta->nconst_index),search_term)->data);
+}
+
+
 

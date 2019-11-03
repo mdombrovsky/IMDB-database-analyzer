@@ -81,6 +81,7 @@ struct title_basics_meta *get_title(char* string){
             if(strstr(column,"1")==NULL){
 
                 get_column(buffer,&data,0);
+                reverse(data);
                 (title_basics_array+movie_count)->tconst=data;
 
                 get_column(buffer,&data,2);
@@ -106,16 +107,30 @@ struct title_basics_meta *get_title(char* string){
 }
 
 void build_bt_title_index(struct title_basics_meta *title_basics_meta){
-
     int i;
-
     /*Loop over all elements in array*/
     for(i=0;i<(title_basics_meta->count);i++){
         add_node(&(title_basics_meta->title_index),((title_basics_meta->array)+i)->primaryTitle,((title_basics_meta->array)+i));
     }
 }
 
-struct title_basics *find_primary_title(struct title_basics_meta *title_basics_meta,char* search_term){
-    return find_node((title_basics_meta->title_index),search_term);
+
+void build_bt_tconst_index(struct title_basics_meta *title_basics_meta){
+    int i;
+    /*Loop over all elements in array*/
+    for(i=0;i<(title_basics_meta->count);i++){
+        add_node(&(title_basics_meta->tconst_index),((title_basics_meta->array)+i)->tconst,((title_basics_meta->array)+i));
+    }
 }
+
+
+struct title_basics *find_bt_title(struct title_basics_meta *title_basics_meta,char* search_term){
+    return (find_node((title_basics_meta->title_index),search_term)->data);
+}
+
+
+struct title_basics *find_bt_tconst(struct title_basics_meta *title_basics_meta,char* search_term){
+    return (find_node((title_basics_meta->tconst_index),search_term)->data);
+}
+
 

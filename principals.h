@@ -10,4 +10,20 @@ struct title_principals {
     char *characters;
 };
 
-struct title_principals *get_principals(char* string);
+struct title_principals_meta {
+    struct title_principals *array;
+    int count;
+    struct node *tconst_index;
+    struct node *nconst_index;
+};
+
+
+
+
+struct title_principals_meta *get_principals(char* string);
+
+struct title_principals *find_tp_title(struct title_principals_meta *title_principals_meta,char* search_term);
+void build_tp_title_index(struct title_principals_meta *title_principals_meta);
+
+struct title_principals *find_tp_nconst(struct title_principals_meta *title_principals_meta,char* search_term);
+void build_tp_nconst_index(struct title_principals_meta *title_principals_meta);
