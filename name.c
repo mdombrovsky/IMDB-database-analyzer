@@ -58,6 +58,8 @@ struct name_basics_meta *get_name(char* string){
         free(column);
     }
 
+    /*printf("Lines: %d\n\n",preformer_count);*/
+
     /*Allocates array*/
     name_basics_array=malloc(sizeof(struct name_basics)*preformer_count);
 
@@ -95,7 +97,7 @@ struct name_basics_meta *get_name(char* string){
     return name_basics_meta;
 }
 
-void build_bn_nconst_index(struct name_basics_meta *name_basics_meta){
+void build_nb_nconst_index(struct name_basics_meta *name_basics_meta){
    int i;
     /*Loop over all elements in array*/
     for(i=0;i<(name_basics_meta->count);i++){
@@ -103,7 +105,7 @@ void build_bn_nconst_index(struct name_basics_meta *name_basics_meta){
     }
 }
 
-void build_bn_name_index(struct name_basics_meta *name_basics_meta){
+void build_nb_name_index(struct name_basics_meta *name_basics_meta){
     int i;
     /*Loop over all elements in array*/
     for(i=0;i<(name_basics_meta->count);i++){
@@ -111,11 +113,11 @@ void build_bn_name_index(struct name_basics_meta *name_basics_meta){
     }
 }
 
-struct name_basics *find_bn_name(struct name_basics_meta *name_basics_meta,char* search_term){
+struct name_basics *find_nb_name(struct name_basics_meta *name_basics_meta,char* search_term){
     return (find_node((name_basics_meta->name_index),search_term)->data);
 }
 
-struct name_basics *find_bn_nconst(struct name_basics_meta *name_basics_meta,char* search_term){
+struct name_basics *find_nb_nconst(struct name_basics_meta *name_basics_meta,char* search_term){
     return (find_node((name_basics_meta->nconst_index),search_term)->data);
 }
 

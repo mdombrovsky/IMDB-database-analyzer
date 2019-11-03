@@ -21,20 +21,41 @@ int main (int argc, char**argv){
         return-1;
     }
 
-    /*name_basics=get_name(argv[1]);
-    build_bn_name_index(name_basics);
-    build_bn_nconst_index(name_basics);
+    printf( "\n" );
 
-    title_basics=get_title
-   */
+    name_basics=get_name(argv[1]);
+    build_nb_name_index(name_basics);
+    build_nb_nconst_index(name_basics);
+
+    title_basics=get_title(argv[1]);
+    build_tb_title_index(title_basics);
+    build_tb_tconst_index(title_basics);
+
+    title_principals=get_principals(argv[1]);
+    build_tp_nconst_index(title_principals);
+    build_tp_tconst_index(title_principals);
+
+    printf( "Ready\n" );
+
+    title = find_tb_title( title_basics, "Blade Runner" );
+
+    principals = find_tp_tconst( title_principals, title->tconst );
+
+    name = find_nb_nconst( name_basics, principals->nconst );
 
  
 
-  printf( "%p\n", (void *)name );
-
-  printf( "%s\n", name->nconst );
-
   printf( "%s\n", name->primaryName );
+
+
+
+  name = find_nb_name( name_basics, "Bruce Lee" );
+
+  principals = find_tp_nconst( title_principals, name->nconst );
+
+  title = find_tb_tconst( title_basics, principals->tconst );
+
+  printf( "%s\n", title->primaryTitle );
 
     return 0;
 }

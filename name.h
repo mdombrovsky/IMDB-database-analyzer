@@ -18,8 +18,8 @@ struct name_basics {
 };
 
 struct name_basics_meta *get_name(char* string);
-void build_bn_name_index(struct name_basics_meta *name_basics_meta);
-void build_bn_nconst_index(struct name_basics_meta *name_basics_meta);
+void build_nb_name_index(struct name_basics_meta *name_basics_meta);
+void build_nb_nconst_index(struct name_basics_meta *name_basics_meta);
 
-struct name_basics *find_bn_name(struct name_basics_meta *name_basics_meta,char* search_term);
-struct name_basics *find_bn_nconst(struct name_basics_meta *name_basics_meta,char* search_term);
+struct name_basics *find_nb_name(struct name_basics_meta *name_basics_meta,char* search_term);
+struct name_basics *find_nb_nconst(struct name_basics_meta *name_basics_meta,char* search_term);

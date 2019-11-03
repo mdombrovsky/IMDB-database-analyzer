@@ -63,7 +63,7 @@ struct title_principals_meta *get_principals(char* string){
 
     rewind(fptr);
 
-    printf("Lines: %d\n\n",preformer_count);
+    /*printf("Lines: %d\n\n",preformer_count);*/
     preformer_count=0;
 
     /*Populates array*/

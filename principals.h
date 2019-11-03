@@ -22,8 +22,8 @@ struct title_principals_meta {
 
 struct title_principals_meta *get_principals(char* string);
 
-struct title_principals *find_tp_title(struct title_principals_meta *title_principals_meta,char* search_term);
-void build_tp_title_index(struct title_principals_meta *title_principals_meta);
+struct title_principals *find_tp_tconst(struct title_principals_meta *title_principals_meta,char* search_term);
+void build_tp_tconst_index(struct title_principals_meta *title_principals_meta);
 
 struct title_principals *find_tp_nconst(struct title_principals_meta *title_principals_meta,char* search_term);
 void build_tp_nconst_index(struct title_principals_meta *title_principals_meta);
