@@ -1,4 +1,3 @@
-
 #include "name.h"
 #include "common.h"
 
@@ -6,45 +5,79 @@ struct name_basics *get_name(char* string){
 
     FILE *fptr;
 
-    struct name_basics *nameStruct=NULL;
+    struct name_basics *name_basics_array=NULL;
 
-    char *buffer=malloc(257);
-    char *fileName;
+    char *buffer;
+    char *file_name;
     char suffix [20] = "/name.basics.tsv";
+
+    char *data=NULL;
 
     char *column=NULL;
     
-    int actorCount=0;
+    int preformer_count=0;
 
-    fileName=malloc(strlen(string)+strlen(suffix)+1);
+    file_name=malloc(strlen(string)+strlen(suffix)+1);
 
-    strcpy(fileName,string);
-    strcat(fileName,suffix);
-
-
-    fptr=fopen(fileName,"r");
+    strcpy(file_name,string);
+    strcat(file_name,suffix);
 
 
+    fptr=fopen(file_name,"r");
+
+    /*Free file_name*/
+    if(file_name){
+        free(file_name);
+        file_name=NULL;
+    }
+    
+
+    /*If unable to open*/
+    if(fptr==NULL){
+        fprintf( stderr, "Error opening file %s%s\n", string,"/name.basics.tsv");
+        return NULL;
+    }
+
+    buffer=malloc(257);
+
+    /*Get amount of preformers*/
     while(fgets(buffer ,256 ,fptr)!=NULL){
         get_column(buffer,&column,4);
-        /*printf("%s\n",column);*/
-        if((strstr(buffer,"actor")!=NULL)||(strstr(buffer,"actress")!=NULL)){
-            actorCount++;
+        if((strstr(column,"actor")!=NULL)||(strstr(column,"actress")!=NULL)){
+            preformer_count++;
+        }
+        free(column);
+    }
+
+    /*Allocates array*/
+    name_basics_array=malloc(sizeof(struct name_basics)*preformer_count);
+
+    rewind(fptr);
+    preformer_count=0;
+
+    /*Populates array*/
+    while(fgets(buffer ,256 ,fptr)!=NULL){
+        get_column(buffer,&column,4);
+        if((strstr(column,"actor")!=NULL)||(strstr(column,"actress")!=NULL)){
+           
+            get_column(buffer,&data,0);
+            (name_basics_array+preformer_count)->nconst=data;
+
+            get_column(buffer,&data,1);
+            (name_basics_array+preformer_count)->primaryName=data;
+
+            preformer_count++;
+
         }
         free(column);
     }
 
 
-
-    printf("Lines: %d\n",actorCount);
     fclose(fptr);
+    fptr=NULL;
 
-    if(fileName){
-        free(fileName);
-        fileName=NULL;
-    }
 
-    return nameStruct;
+    return name_basics_array;
 
 }
 
