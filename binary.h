@@ -14,3 +14,4 @@ struct node{
 };
 void add_node(struct node **node,char*key,void*data);
 struct node* find_node(struct node *node,char *key);
+void free_tree(struct node *node);

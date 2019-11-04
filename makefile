@@ -6,8 +6,8 @@ all: a3
 a3: a3.o name.o binary.o common.o principals.o title.o
 	$(CC) $(CFLAGS) a3.o name.o binary.o common.o principals.o title.o -o a3
 
-a3.o: a3.c common.h binary.h name.h principals.h title.h
-	$(CC) $(CFLAGS) -c a3.c
+a3.o: main.c common.h binary.h name.h principals.h title.h
+	$(CC) $(CFLAGS) -c main.c -o a3.o
 
 binary.o: binary.c common.h
 	$(CC) $(CFLAGS) -c binary.c -o binary.o

@@ -1,3 +1,10 @@
+/**
+ * Name: Michael Dombrovsky
+ * Student Number: 1040277
+ * Email: mdombrov@uoguelph.ca
+ **/ 
+
+
 #include "name.h"
 #include "title.h"
 #include "principals.h"
@@ -10,6 +17,7 @@ int search(char **string,char*target);
 int main (int argc, char**argv){
 
     int buffer_size=1024;
+    
     char *buffer=NULL;
 
     char *nconst;
@@ -125,6 +133,76 @@ int main (int argc, char**argv){
         free(buffer);
         buffer=NULL;
     }
+
+    /*
+    int i;
+
+    if(name_basics){
+        free_tree(name_basics->name_index);
+        free_tree(name_basics->nconst_index);
+        if(name_basics->array){
+            for(i=0;i<name_basics->count;i++){
+                if((name_basics->array)[i].primaryName){
+                    free(((name_basics->array))[i].primaryName);
+                    (name_basics->array)[i].primaryName=NULL;
+                }
+                if((name_basics->array)[i].nconst){
+                    free((name_basics->array)[i].nconst);
+                    (name_basics->array)[i].nconst=NULL;
+                }
+            }
+            free(name_basics->array);
+            name_basics->array=NULL;
+        }
+        free(name_basics);
+        name_basics=NULL;
+    }
+
+    if(title_basics){
+        free_tree(title_basics->title_index);
+        free_tree(title_basics->tconst_index);
+        if(title_basics->array){
+            for(i=0;i<title_basics->count;i++){
+                if(((title_basics->array))[i].primaryTitle){
+                    free(((title_basics->array))[i].primaryTitle);
+                    ((title_basics->array))[i].primaryTitle=NULL;
+                }
+                if(((title_basics->array))[i].tconst){
+                    free(((title_basics->array))[i].tconst);
+                    ((title_basics->array))[i].tconst=NULL;
+                }
+            }
+            free(title_basics->array);
+            title_basics->array=NULL;
+        }
+        free(title_basics);
+        title_basics=NULL;
+    }
+
+    if(title_principals){
+        free_tree(title_principals->tconst_index);
+        free_tree(title_principals->nconst_index);
+        if(title_principals->array){
+            for(i=0;i<title_principals->count;i++){
+                if(((title_principals->array))[i].nconst){
+                    free((title_principals->array)[i].nconst);
+                    ((title_principals->array))[i].nconst=NULL;
+                }
+                if(((title_principals->array))[i].tconst){
+                    free((title_principals->array)[i].tconst);
+                    ((title_principals->array))[i].tconst=NULL;
+                }
+            }
+            free(title_principals->array);
+            title_principals->array=NULL;
+        }
+        free(title_principals);
+        title_principals=NULL;
+    }*/
+
+
+
+
     return 0;
 }
 

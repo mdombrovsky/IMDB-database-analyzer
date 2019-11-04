@@ -42,3 +42,12 @@ struct node* find_node(struct node *node,char *key){
         return NULL;
     }
 }
+
+void free_tree(struct node*node){
+    if(node){
+        free_tree(node->right_child);
+        free_tree(node->left_child);
+        free(node);
+        node=NULL;
+    }
+}
