@@ -24,7 +24,7 @@ struct title_principals_meta *get_principals(char* string){
     char *column=NULL;
     
     int preformer_count=0;
-    int buffer_size=1000;
+    int buffer_size=1024;
 
     file_name=malloc(strlen(string)+strlen(suffix)+1);
 

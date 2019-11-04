@@ -24,7 +24,7 @@ struct title_basics_meta *get_title(char* string){
     
     int movie_count=0;
 
-    int buffer_size=1000;
+    int buffer_size=1024;
 
     file_name=malloc(strlen(string)+strlen(suffix)+1);
 

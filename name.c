@@ -24,7 +24,7 @@ struct name_basics_meta *get_name(char* string){
     
     int preformer_count=0;
 
-    int buffer_size=1000;
+    int buffer_size=1024;
 
     file_name=malloc(strlen(string)+strlen(suffix)+1);
 
