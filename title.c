@@ -94,6 +94,7 @@ struct title_basics_meta *get_title(char* string){
     }
 
 
+
     fclose(fptr);
     fptr=NULL;
 
@@ -125,12 +126,16 @@ void build_tb_tconst_index(struct title_basics_meta *title_basics_meta){
 
 
 struct title_basics *find_tb_title(struct title_basics_meta *title_basics_meta,char* search_term){
-    return (find_node((title_basics_meta->title_index),search_term)->data);
+    struct node *node=find_node((title_basics_meta->title_index),search_term);
+    return node?node->data:NULL;
+
 }
 
 
 struct title_basics *find_tb_tconst(struct title_basics_meta *title_basics_meta,char* search_term){
-    return (find_node((title_basics_meta->tconst_index),search_term)->data);
+    struct node *node=find_node((title_basics_meta->tconst_index),search_term);
+    return node?node->data:NULL;
+
 }
 
 

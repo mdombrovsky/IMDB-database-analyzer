@@ -114,11 +114,14 @@ void build_nb_name_index(struct name_basics_meta *name_basics_meta){
 }
 
 struct name_basics *find_nb_name(struct name_basics_meta *name_basics_meta,char* search_term){
-    return (find_node((name_basics_meta->name_index),search_term)->data);
+    struct node* node=find_node((name_basics_meta->name_index),search_term);
+    return node?node->data:NULL;
+
 }
 
 struct name_basics *find_nb_nconst(struct name_basics_meta *name_basics_meta,char* search_term){
-    return (find_node((name_basics_meta->nconst_index),search_term)->data);
+    struct node* node=find_node((name_basics_meta->nconst_index),search_term);
+    return node?node->data:NULL;
 }
 
 

@@ -17,7 +17,7 @@ int main (int argc, char**argv){
 
     char *movie_characters;
     char *movie_title;
-    char *movie_name;
+    char *actor_name;
 
     struct name_basics_meta* name_basics;
     struct name_basics* name;
@@ -37,56 +37,175 @@ int main (int argc, char**argv){
     }
 
 
+
+
     buffer=malloc(buffer_size+1);
 
+
+
+   /* title_basics=get_title(argv[1]);
+    printf("Done title\n");
+
+    
+    build_tb_tconst_index(title_basics);
+
+    printf("Done building title\n");
+
+      title = find_tb_tconst( title_basics, "4860800tt" );
+
+if(title){
+    printf("title struct:\n");
+    fflush(stdout);
+
+    if(!(title->primaryTitle)){
+        printf("title is null");
+    }
+    if(!(title->tconst)){
+        printf("tconst is null");
+    }
+    fflush(stdout);
+    printf("title->primaryTitle:%s\ntitle->tconst:%s\n", title->primaryTitle,title->tconst);
+    fflush(stdout);}
+    else{
+        printf("title is null\n");
+    }
+
+
+    */
     name_basics=get_name(argv[1]);
+    printf("Done name\n");
+
+
     build_nb_name_index(name_basics);
     build_nb_nconst_index(name_basics);
 
+    printf("Done building name\n");
+
     title_basics=get_title(argv[1]);
+    printf("Done title\n");
+
+    
     build_tb_title_index(title_basics);
     build_tb_tconst_index(title_basics);
 
+    printf("Done building title\n");
+
+
     title_principals=get_principals(argv[1]);
+    printf("Done role\n");
+    
     build_tp_nconst_index(title_principals);
     build_tp_tconst_index(title_principals);
+
+    printf("Done building role\n");
+
+
+
+    /*name = find_nb_name( name_basics, "Harrison Ford");
+    printf("name struct:\n");
+    fflush(stdout);
+
+    printf("name->primaryName:%s\nname->nconst:%s\n", name->primaryName,name->nconst);
+    fflush(stdout);
+
+  principals = find_tp_nconst( title_principals, name->nconst )->data;
+
+    printf("principals struct:\n");
+    fflush(stdout);
+
+    printf("principals->tconst:%s\nprincipals->nconst:%s\n", principals->tconst,principals->nconst);
+    fflush(stdout);
+  title = find_tb_tconst( title_basics, principals->tconst );
+
+if(title){
+    printf("title struct:\n");
+    fflush(stdout);
+
+    if(!(title->primaryTitle)){
+        printf("title is null");
+    }
+    if(!(title->tconst)){
+        printf("tconst is null");
+    }
+    fflush(stdout);
+    printf("title->primaryTitle:%s\ntitle->tconst:%s\n", title->primaryTitle,title->tconst);
+    fflush(stdout);}
+    else{
+        printf("title is null\n");
+    }
+
+fflush(stdout);
+  printf( "%s\n", title->primaryTitle );
+*/
 
     while(1){
         printf("> ");
         fgets(buffer,buffer_size,stdin);
-
+    
         if(search(&buffer,"name")){
-            movie_name=buffer;
-            if(movie_name!=NULL){
-                name = find_nb_name(name_basics, movie_name);
+            /*printf("Here1\n");
+            fflush(stdout);*/
+            actor_name=buffer;
+            if(actor_name!=NULL){
+                /*printf("Here2\n");
+                fflush(stdout);*/
+                name = find_nb_name(name_basics, actor_name);
                 if(name!=NULL){
-                    nconst=name->nconst;
+                    /*printf("Here3\n");
+                    fflush(stdout);*/
+                    nconst=name->nconst;                   
                     if(nconst!=NULL){
+                        /*printf("Here4\n");
+                        fflush(stdout);*/
                         node=find_tp_nconst(title_principals, nconst );
                         while(node!=NULL){
+                            /*printf("Here5\n");
+                            fflush(stdout);*/
                             principals=node->data;
                             if(principals!=NULL){
+                                /*printf("Here6\n");
+                                fflush(stdout);*/
                                 movie_characters=principals->characters;
                                 if(movie_characters!=NULL){
+                                    /*printf("Here7\n");
+                                    fflush(stdout);*/
                                     tconst=principals->tconst;
                                     if(tconst!=NULL){
+                                        /*printf("Here8\n");
+                                        fflush(stdout);*/
                                         title = find_tb_tconst(title_basics, tconst);
                                         if(title!=NULL){
+                                            /*printf("Here9\n");
+                                            fflush(stdout);*/
                                             movie_title=title->primaryTitle;
                                             if(movie_title!=NULL){
-                                                printf("%s : %s\n",movie_title,movie_characters);
+                                                /*printf("Here10\n");
+                                                fflush(stdout);*/
+                                                printf("%s : %s",movie_title,movie_characters);
                                             }
                                         }
                                     }
                                 }     
                             }
-                            node=node->left_child;
+                            /*if(node->left_child){
+                                node=find_node(node->left_child,nconst);
+                                
+                                if(node->left_child->key){
+                                    if((strcmp(nconst,(node->left_child->key)))==0){
+                                        node=node->left_child;
+                                        continue;
+                                    }
+                                }
+                            }
+                            node=NULL;*/
+                            node=find_node(node->left_child,nconst);
+
                         }
                     }
                 }
             }
         } else if(search(&buffer,"title")){
-            movie_title=buffer;
+           /* movie_title=buffer;
             if(movie_title!=NULL){
                 title = find_tb_title(title_basics, movie_title);
                 if(title!=NULL){
@@ -102,9 +221,9 @@ int main (int argc, char**argv){
                                     if(nconst!=NULL){
                                         name = find_nb_nconst(name_basics, nconst);
                                         if(name!=NULL){
-                                            movie_name=name->primaryName;
-                                            if(movie_name!=NULL){
-                                                printf("%s : %s\n",movie_name,movie_characters);
+                                            actor_name=name->primaryName;
+                                            if(actor_name!=NULL){
+                                                printf("%s : %s\n",actor_name,movie_characters);
                                             }
                                         }
                                     }
@@ -116,11 +235,10 @@ int main (int argc, char**argv){
                 }
             }
             
-
+*/
         } 
         else
         { 
-            /** * */
         }
 
 
@@ -137,7 +255,7 @@ int main (int argc, char**argv){
 
     title = find_tb_title( title_basics, "Blade Runner" );
 
-    principals = find_tp_tconst( title_principals, title->tconst );
+    principals = find_tp_tconst( title_principals, title->tconst )->data;
 
     name = find_nb_nconst( name_basics, principals->nconst );
 
@@ -149,7 +267,7 @@ int main (int argc, char**argv){
 
   name = find_nb_name( name_basics, "Bruce Lee" );
 
-  principals = find_tp_nconst( title_principals, name->nconst );
+  principals = find_tp_nconst( title_principals, name->nconst )->data;
 
   title = find_tb_tconst( title_basics, principals->tconst );
 
@@ -189,6 +307,17 @@ int search(char **string,char*target){
 
     (*string)=to_search;
 
+    len=strlen(to_search);
+
+    for(i=0;i<len;i++){
+        if((*to_search)=='\n'){
+            (*to_search)='\0';
+        }
+        to_search++;
+    }
+    
+
+    
     return 1;
 }
 

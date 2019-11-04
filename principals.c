@@ -5,6 +5,7 @@
  **/ 
 #include "principals.h"
 #include "common.h"
+#include <string.h>
 
 struct title_principals_meta *get_principals(char* string){
 
@@ -78,6 +79,9 @@ struct title_principals_meta *get_principals(char* string){
             (title_principals_array+preformer_count)->nconst=data;
 
             get_column(buffer,&data,5);
+            /*if(*(data+strlen(data)-1)=='\n'){
+                (*(data+strlen(data)-1))='\0';
+            }*/
             (title_principals_array+preformer_count)->characters=data;
 
             preformer_count++;
