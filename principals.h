@@ -3,7 +3,7 @@
  * Student Number: 1040277
  * Email: mdombrov@uoguelph.ca
  **/ 
-
+#include "binary.h"
 struct title_principals {
     char *nconst;
     char *tconst;
@@ -22,8 +22,8 @@ struct title_principals_meta {
 
 struct title_principals_meta *get_principals(char* string);
 
-struct title_principals *find_tp_tconst(struct title_principals_meta *title_principals_meta,char* search_term);
+struct node *find_tp_tconst(struct title_principals_meta *title_principals_meta,char* search_term);
 void build_tp_tconst_index(struct title_principals_meta *title_principals_meta);
 
-struct title_principals *find_tp_nconst(struct title_principals_meta *title_principals_meta,char* search_term);
+struct node *find_tp_nconst(struct title_principals_meta *title_principals_meta,char* search_term);
 void build_tp_nconst_index(struct title_principals_meta *title_principals_meta);

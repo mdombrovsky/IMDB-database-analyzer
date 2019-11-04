@@ -5,8 +5,6 @@
  **/ 
 #include "principals.h"
 #include "common.h"
-#include "binary.h"
-
 
 struct title_principals_meta *get_principals(char* string){
 
@@ -111,8 +109,8 @@ void build_tp_tconst_index(struct title_principals_meta *title_principals_meta){
 }
 
 
-struct title_principals *find_tp_tconst(struct title_principals_meta *title_principals_meta,char* search_term){
-    return (find_node((title_principals_meta->tconst_index),search_term)->data);
+struct node *find_tp_tconst(struct title_principals_meta *title_principals_meta,char* search_term){
+    return (find_node((title_principals_meta->tconst_index),search_term));
 }
 
 void build_tp_nconst_index(struct title_principals_meta *title_principals_meta){
@@ -124,8 +122,8 @@ void build_tp_nconst_index(struct title_principals_meta *title_principals_meta){
 }
 
 
-struct title_principals *find_tp_nconst(struct title_principals_meta *title_principals_meta,char* search_term){
-    return (find_node((title_principals_meta->nconst_index),search_term)->data);
+struct node *find_tp_nconst(struct title_principals_meta *title_principals_meta,char* search_term){
+    return (find_node((title_principals_meta->nconst_index),search_term));
 }
 
 
