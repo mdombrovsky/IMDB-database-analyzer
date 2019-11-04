@@ -35,7 +35,11 @@ void get_column(char *line, char **toReturn, int columnNumber){
     (*toReturn)=malloc(len+1);
 
     strncpy((*toReturn),start,len);
-
+    if(len!=0){
+        if((*toReturn)[len-1]=='\n'){
+            (*toReturn)[len-1]='\0';   
+        }
+    }
     (*toReturn)[len]='\0';
 }
 
